@@ -1,0 +1,13 @@
+--Create a faovrite books database
+
+/**Favorite Books:
+Bible
+No More Mr Nice Guy
+Tom Sawyer
+**/
+
+CREATE TABLE favorite_books (id integer primary key, name TEXT, rating INTEGER );
+
+INSERT INTO favorite_books VALUES (1, "Bible", 3);
+INSERT INTO favorite_books VALUES (2, "No More Mr Nice Guy", 2);
+INSERT INTO favorite_books VALUES (3, "Tom Sawyer",3)
