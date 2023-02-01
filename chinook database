@@ -1,0 +1,78 @@
+/*Show Customers (their full names, customer ID, and country) who are not in the US. (Hint: != or <> can be used to say "is not equal to")
+SELECT firstName, lastName, CustomerId, Country
+FROM customers
+WHERE country <> 'USA';
+
+
+/*Show only the Customers from Brazil
+SELECT *
+FROM customers
+WHERE Country = 'Brazil'
+
+
+/*Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, Date of the invoice, and billing country
+SELECT FirstName, LastName, InvoiceID, InvoiceDate, BillingCountry
+FROM invoices as inv
+LEFT JOIN customers as cust
+ON inv.CustomerId = cust.CustomerId
+WHERE BillingCountry = 'Brazil';
+
+
+/*Show the Employees who are Sales Agents
+SELECT *
+FROM employees
+WHERE Title = 'Sales Support Agent'
+
+
+/*Provide a query that shows the invoices associated with each sales agent. The resulting table should include the Sales Agent's full name
+SELECT emp.FirstName, emp.LastName, inv.InvoiceID
+FROM employees emp
+JOIN Customers cust ON cust.SupportRepId = emp.EmployeeID
+JOIN Invoices Inv ON Inv.CustomerId = cust.CustomerId;
+
+
+/*How many Invoices were there in 2009?
+SELECT COUNT(*)
+FROM Invoices
+WHERE InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31';
+
+
+/*What are the total sales for 2009?
+SELECT SUM(Total)
+FROM invoices
+WHERE InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+
+
+/*Write a query that includes the purchased track name with each invoice line ID
+SELECT t.Name, i.InvoiceLineId
+FROM Invoice_items i
+JOIN Tracks t 
+ON i.TrackId = t.TrackId;
+
+
+/*Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre
+SELECT t.Name AS 'Track Name', a.Title AS 'Album Title', m.Name AS 'Media Type', g.Name AS 'Genre'
+FROM tracks t
+JOIN Albums a 
+on a.AlbumId = t.AlbumId
+JOIN Media_Types m
+on m.MediaTypeId = t.MediaTypeId
+JOIN Genres g
+on g.GenreId = t.GenreId;
+
+
+/*Show the total sales made by each sales agent/*
+SELECT emp.FirstName, emp.LastName,
+ROUND(SUM(Inv.Total), 2) as 'Total Sales' 
+FROM Employees emp
+JOIN Customers cust 
+ON cust.SupportRepId = emp.EmployeeId
+JOIN Invoices Inv 
+ON Inv.CustomerId = cust.CustomerId
+WHERE emp.Title = 'Sales Support Agent' 
+GROUP BY emp.FirstName;
+
+
+
+
+
